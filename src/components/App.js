@@ -24,6 +24,7 @@ class App extends React.Component {
                 exact
                 component={DeleteSession}
               />
+              {/* I want this :id to be the google auth id, not session id */}
               <Route path="/sessions/:id" exact component={ViewResults} />
             </Switch>
           </div>

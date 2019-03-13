@@ -1,9 +1,19 @@
 import React from "react";
+import { connect } from "react-redux";
+import { createSession } from "../../actions";
+import SessionForm from "./SessionForm";
 
 class LogSession extends React.Component {
+  onSubmit = (formValues) => {
+    this.props.createSession(formValues);
+  };
+
   render() {
-    return <div>This is the Log Session page!</div>;
+    return <SessionForm onSubmit={this.onSubmit} />;
   }
 }
 
-export default LogSession;
+export default connect(
+  null,
+  { createSession }
+)(LogSession);
