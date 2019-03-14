@@ -6,7 +6,8 @@ import {
   CREATE_SESSION,
   EDIT_SESSION,
   GET_SESSION,
-  GET_SESSIONS
+  GET_SESSIONS,
+  DELETE_SESSION
 } from "./types";
 
 export const signIn = (userId) => {
@@ -32,7 +33,7 @@ export const createSession = (formValues) => async (dispatch, getState) => {
 export const editSession = (id, formValues) => async (dispatch, getState) => {
   const response = await sessions.patch(`/sessions/${id}`, formValues);
   dispatch({ type: EDIT_SESSION, payload: response.data });
-  history.push(`/sessions/${id}`);
+  history.push(`/sessions`);
 };
 
 export const getSession = (id) => async (dispatch) => {
@@ -43,4 +44,10 @@ export const getSession = (id) => async (dispatch) => {
 export const getSessions = () => async (dispatch) => {
   const response = await sessions.get("/sessions");
   dispatch({ type: GET_SESSIONS, payload: response.data });
+};
+
+export const deleteSession = (id) => async (dispatch) => {
+  await sessions.delete(`/sessions/${id}`);
+  dispatch({ type: DELETE_SESSION, payload: id });
+  history.push("/sessions");
 };

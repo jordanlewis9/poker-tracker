@@ -4,3 +4,4 @@ export const CREATE_SESSION = "CREATE_SESSION";
 export const EDIT_SESSION = "EDIT_SESSION";
 export const GET_SESSION = "GET_SESSION";
 export const GET_SESSIONS = "GET_SESSIONS";
+export const DELETE_SESSION = "DELETE_SESSION";

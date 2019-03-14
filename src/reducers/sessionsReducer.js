@@ -3,7 +3,8 @@ import {
   CREATE_SESSION,
   EDIT_SESSION,
   GET_SESSION,
-  GET_SESSIONS
+  GET_SESSIONS,
+  DELETE_SESSION
 } from "../actions/types";
 
 export default (state = {}, action) => {
@@ -16,6 +17,8 @@ export default (state = {}, action) => {
       return { ...state, [action.payload.id]: action.payload };
     case GET_SESSIONS:
       return { ...state, ..._.mapKeys(action.payload, "id") };
+    case DELETE_SESSION:
+      return _.omit(state, action.payload);
     default:
       return state;
   }

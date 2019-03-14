@@ -11,7 +11,7 @@ const Header = () => {
       <Link to="/sessions/new" className="item">
         Record Sessions
       </Link>
-      <Link to="/sessions/:id" className="item">
+      <Link to="/sessions" className="item">
         View Results
       </Link>
       <Link to="/" className="right menu item">
