@@ -18,3 +18,11 @@
 #name {
   align-self: center;
 }
+
+.list {
+  background: white;
+}
+
+.black {
+  color: black;
+}
