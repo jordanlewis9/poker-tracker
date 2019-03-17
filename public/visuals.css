@@ -23,6 +23,59 @@
   background: white;
 }
 
-.black {
+.outcome {
+  margin-right: 10px;
+  align-self: center;
+  font-size: 2rem;
+}
+
+.positive {
+  color: green;
+}
+
+.negative {
+  color: red;
+}
+
+#form {
+  background: rgba(128, 128, 128, 0.9);
+}
+
+div .label {
+  color: white;
+}
+
+.forms {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.fields {
+  margin: 5px auto 5px auto;
+  padding-left: 5px;
+  padding-right: 5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+}
+
+.enter {
+  padding-left: 5px;
+  padding-bottom: 5px;
+}
+
+.ineligible {
+  background: black;
+  height: 25vh;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+.adjust {
+  display: flex;
+  padding-top: 5px;
+}
+
+.results {
   color: black;
 }

@@ -26,7 +26,7 @@ class EditSession extends React.Component {
 
     return (
       <div>
-        <h3>Edit Session</h3>
+        <h1>Edit Session</h1>
         <SessionForm
           initialValues={_.pick(
             this.props.sessions,
