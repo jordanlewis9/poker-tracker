@@ -1,14 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { signIn, signOut } from "../actions";
-import key from "../key.js";
 
 class GoogleAuth extends React.Component {
   componentDidMount() {
     window.gapi.load("client:auth2", () => {
       window.gapi.client
         .init({
-          clientId: key,
+          clientId: process.env.REACT_APP_POKER_TRACKER,
           scope: "email"
         })
         .then(() => {

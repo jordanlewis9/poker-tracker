@@ -10,16 +10,20 @@ const ResultsBar = (props) => {
         return null;
       }
     });
-    return instances.sort((a, b) => {
-      a = new Date(a.date);
-      b = new Date(b.date);
-      return a > b ? -1 : a < b ? 1 : 0;
-    });
+    if (!instances) {
+      return userSessions();
+    } else {
+      return instances.sort((a, b) => {
+        a = new Date(a.date);
+        b = new Date(b.date);
+        return a > b ? -1 : a < b ? 1 : 0;
+      });
+    }
   };
 
   const totalResults = () => {
     const { sessions, isSignedIn } = props;
-    if (sessions === null) {
+    if (sessions === null || userSessions()[0] === undefined) {
       return <div>Loading...</div>;
     }
     if (isSignedIn === null) {
@@ -72,11 +76,8 @@ const ResultsBar = (props) => {
   };
 
   const totalHours = () => {
-    const { sessions, isSignedIn } = props;
-    if (sessions === null) {
-      return <div>Loading...</div>;
-    }
-    if (isSignedIn === null) {
+    const { isSignedIn } = props;
+    if (isSignedIn === null || userSessions()[0] === undefined) {
       return <div>Loading...</div>;
     } else if (isSignedIn === false) {
       return (
