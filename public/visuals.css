@@ -1,13 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .home {
   text-align: center;
 }
 
 #root {
-  background: url("./background.jpg") no-repeat center center fixed;
+  background: url("./background.jpg") no-repeat center center;
+  background-attachment: fixed;
   background-size: cover;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   color: white;
+  overflow-y: scroll;
 }
 
 .login {
@@ -78,4 +86,9 @@ div .label {
 
 .results {
   color: black;
+}
+
+button .ui .left .floated .button:hover,
+button .ui .right .floated .button:hover {
+  background-color: rgb(10, 10, 10);
 }

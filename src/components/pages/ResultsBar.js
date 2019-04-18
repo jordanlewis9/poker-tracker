@@ -2,28 +2,28 @@ import React from "react";
 import { sessionResults, hours } from "./resultsfunctions/functions";
 
 const ResultsBar = (props) => {
-  const userSessions = () => {
-    let instances = props.sessions.filter((session) => {
-      if (session.userId === props.currentUserId) {
-        return session;
-      } else {
-        return null;
-      }
-    });
-    if (!instances) {
-      return userSessions();
-    } else {
-      return instances.sort((a, b) => {
-        a = new Date(a.date);
-        b = new Date(b.date);
-        return a > b ? -1 : a < b ? 1 : 0;
-      });
-    }
-  };
+  // const userSessions = () => {
+  //   let instances = props.sessions.filter((session) => {
+  //     if (session.userId === props.currentUserId) {
+  //       return session;
+  //     } else {
+  //       return null;
+  //     }
+  //   });
+  //   if (!instances) {
+  //     return userSessions();
+  //   } else {
+  //     return instances.sort((a, b) => {
+  //       a = new Date(a.date);
+  //       b = new Date(b.date);
+  //       return a > b ? -1 : a < b ? 1 : 0;
+  //     });
+  //   }
+  // };
 
   const totalResults = () => {
-    const { sessions, isSignedIn } = props;
-    if (sessions === null || userSessions()[0] === undefined) {
+    const { sessions, isSignedIn, currentUserId } = props;
+    if (sessions === null && currentUserId === null) {
       return <div>Loading...</div>;
     }
     if (isSignedIn === null) {
@@ -35,18 +35,18 @@ const ResultsBar = (props) => {
         </div>
       );
     }
-    return userSessions()
+    return sessions
       .map((i) => {
         return sessionResults(i.cashout, i.buyin);
       })
       .reduce((acc, curv) => {
         return acc + curv;
-      });
+      }, 0);
   };
 
   const winPercentage = () => {
-    const { sessions, isSignedIn } = props;
-    if (sessions === null) {
+    const { sessions, isSignedIn, currentUserId } = props;
+    if (sessions === null && currentUserId === null) {
       return <div>Loading...</div>;
     }
     if (isSignedIn === null) {
@@ -57,27 +57,28 @@ const ResultsBar = (props) => {
           <h1>You must sign in to be able to use this feature.</h1>
         </div>
       );
-    }
-    let wins = [];
-    let losses = [];
-    userSessions()
-      .map((i) => {
-        return sessionResults(i.cashout, i.buyin);
-      })
-      .forEach((session) => {
-        if (session >= 0) {
-          wins.push(session);
-        } else {
-          losses.push(session);
-        }
-      });
+    } else {
+      let wins = [];
+      let losses = [];
+      sessions
+        .map((i) => {
+          return sessionResults(i.cashout, i.buyin);
+        })
+        .forEach((session) => {
+          if (session >= 0) {
+            wins.push(session);
+          } else {
+            losses.push(session);
+          }
+        });
 
-    return (wins.length / (wins.length + losses.length)).toFixed(2) * 100;
+      return ((wins.length / (wins.length + losses.length)) * 100).toFixed(2);
+    }
   };
 
   const totalHours = () => {
-    const { isSignedIn } = props;
-    if (isSignedIn === null || userSessions()[0] === undefined) {
+    const { isSignedIn, sessions, currentUserId } = props;
+    if (isSignedIn === null && currentUserId === null) {
       return <div>Loading...</div>;
     } else if (isSignedIn === false) {
       return (
@@ -85,16 +86,17 @@ const ResultsBar = (props) => {
           <h1>You must sign in to be able to use this feature.</h1>
         </div>
       );
+    } else {
+      return hours(sessions).reduce((acc, curv) => {
+        return acc + curv;
+      }, 0);
     }
-    let arr = userSessions();
-    return hours(arr).reduce((acc, curv) => {
-      return acc + curv;
-    });
+    // let arr = userSessions();
   };
 
   const renderList = () => {
-    const { sessions, isSignedIn } = props;
-    if (sessions === null) {
+    const { sessions, isSignedIn, currentUserId } = props;
+    if (sessions === null && currentUserId === null) {
       return <div>Loading...</div>;
     }
     if (isSignedIn === null) {

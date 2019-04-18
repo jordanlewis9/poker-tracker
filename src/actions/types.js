@@ -5,3 +5,5 @@ export const EDIT_SESSION = "EDIT_SESSION";
 export const GET_SESSION = "GET_SESSION";
 export const GET_SESSIONS = "GET_SESSIONS";
 export const DELETE_SESSION = "DELETE_SESSION";
+export const PAGE_UP = "PAGE_UP";
+export const PAGE_DOWN = "PAGE_DOWN";

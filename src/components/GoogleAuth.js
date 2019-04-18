@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { signIn, signOut } from "../actions";
+import { signIn, signOut, getSessions } from "../actions";
 
 class GoogleAuth extends React.Component {
-  componentDidMount() {
+  componentWillMount() {
     window.gapi.load("client:auth2", () => {
       window.gapi.client
         .init({
@@ -14,6 +14,7 @@ class GoogleAuth extends React.Component {
           this.auth = window.gapi.auth2.getAuthInstance();
           this.onAuthChange(this.auth.isSignedIn.get());
           this.auth.isSignedIn.listen(this.onAuthChange);
+          this.props.getSessions(this.props.currentUserId);
         });
     });
   }
@@ -63,10 +64,13 @@ class GoogleAuth extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { isSignedIn: state.auth.isSignedIn };
+  return {
+    isSignedIn: state.auth.isSignedIn,
+    currentUserId: state.auth.userId
+  };
 };
 
 export default connect(
   mapStateToProps,
-  { signIn, signOut }
+  { signIn, signOut, getSessions }
 )(GoogleAuth);
