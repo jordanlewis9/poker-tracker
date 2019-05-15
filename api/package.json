@@ -1,0 +1,15 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "server for poker tracking",
+  "main": "index.js",
+  "scripts": {
+    "start": "json-server -p 3001 -w db.json"
+  },
+  "author": "Jordan Lewis",
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "^0.14.2",
+    "save": "^2.3.3"
+  }
+}
